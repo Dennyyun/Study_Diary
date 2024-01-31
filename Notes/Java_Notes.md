@@ -138,3 +138,98 @@ int [][] arr = new int [m][n]
 > 成员变量：代表属性。
 
 > 成员方法：代表行为。
+
+### 封装
+
+> 注意：<font color =red >对象代表什么，就必须封装对0应的数据，并提供数据对应的行为。</font>
+
+### 构造方法
+
+特点：
+
+- 方法必须与类名一样，没有返回值，（不能由 return 带回结果数据 ）
+
+==注意：==
+
+- <font color = red>如果没有定义构造方法，系统会提供一个默认的无参构造方法。</font>
+- <font color = red>如果定义了构造方法，这系统不会提供无参构造方法。</font>
+
+执行时机：
+
+1. 创建对象有虚拟机调用，不能手动调用。
+2. 每创建一个对象，就会调用一次构造方法。
+
+
+
+## 字符串（String）
+
+### 常用的类型：
+
+```java
+//第一种
+String str = "abc";
+   
+//第二种
+char [ ] ch ={'a','b','c'}
+String str = new String(ch)	//将其拼接成abc
+    
+    //第三种
+byte[ ] bytes = {97,98,99,100};\
+ String str = new String(bytes);//将其转换为字符串并拼接
+```
+
+### 字符串的比较
+
+> 基本数据类型比较的是数据值
+
+```java
+int a = 12;
+int b = 10;
+sout(	a	==	b	); 	//false
+```
+
+> 引用数据类型比较的是地址值
+
+```java
+String s1 = new String 	("avb");
+String s2 = new String	 ("avb");
+sout( s1 == s2) ;	//false
+```
+
+#### 比较方法：
+
+```java
+//两者相同，只不过一个区分大小写，一个不区分大小写
+//equals
+String a = "abc";
+String b = "ABC";
+a.equals( b );  //false
+
+//equalsIgnoreCase
+a.equalsIgnoreCase( b );  //true
+```
+
+### 遍历字符串
+
+```java
+//根据索引返回字符
+public char charAt（）
+字符串对象.charAt(索引);
+
+//返回字符串的长度
+public int length（）
+字符串对象.length（）
+```
+
+> `Char` 类型的变量在参与计算时，类型会自动提升为 `int`  ，查询`ASCII` 表
+
+### 截取 `substring()`
+
+```java
+//		截取以beginIndex开头到endIndex 结尾的字符(不包含endIndex) 左闭右开
+String substring(int beginIndex, int endIndex);
+   
+//从 endIndex 开始截取到末尾;
+String substring(int endIndex);
+```
+
