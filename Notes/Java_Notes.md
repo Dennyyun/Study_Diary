@@ -1,4 +1,4 @@
-# Denny‘s  Java Notes
+# Java Notes
 
 ## 方法（method）
 
@@ -301,11 +301,17 @@ StringJoiner sj = new StringJoiner("分隔符","前缀","后缀");
 
 > 只能存储引用**数据类型**, <font color = red>基本数据类型想要存储,需要变成其对应的包装类</font>
 
+
+
 ### 创建对象
 
 ```java
 ArrayList<数据类型> strings = new ArrayList<>();
 ```
+
+
+
+
 
 ### 成员方法
 
@@ -315,6 +321,10 @@ ArrayList<数据类型> strings = new ArrayList<>();
 - E `set(int index, E e)`: 修改指定索引下的元素,返回原来的元素.
 - E `get()`: 获取指定索引的元素.
 - E `size()`: 集合的长度.
+
+
+
+
 
 ## 面向对象
 
@@ -363,6 +373,10 @@ static ：表示静态，是java的修饰符，可以修饰成员方法，成员
      - 对象名调用。
 - 工具类：做事情的类,但不描述任何事物的类.
 
+
+
+
+
 ### 继承
 
 - `java` 只支持单继承,不支持多继承,但支持多层继承.
@@ -371,6 +385,8 @@ static ：表示静态，是java的修饰符，可以修饰成员方法，成员
 
 ==当类与类之间,存在相同(共性)的内容,并满足子类是父类中的一种,就可以考虑使用继承,来优化代码==
 
+
+
 #### 子类可以继承哪些父类中的内容
 
 | 构造方法 | `非私有`     **不能** | `private`  **不能**   |
@@ -378,18 +394,32 @@ static ：表示静态，是java的修饰符，可以修饰成员方法，成员
 | 成员变量 | `非私有`     **能**   | `private`   **能**    |
 | 成员方法 | `需方发表`  **能**    | `否则`       **不能** |
 
+
+
 #### 成员变量访问特点
 
 > ==就近原则:谁离我近,我就用谁.==
+
+
+
+
 
 #### 成员方法的访问特点
 
 - `this`调用:  就近原则 (谁离我近就用谁。)
 - `super` 调用：直接访问父类。
 
+
+
+
+
 #### 方法重写
 
 > 重写的方法尽量与父类保持一致。
+
+
+
+
 
 #### 构造方法访问的特点
 
@@ -398,12 +428,20 @@ static ：表示静态，是java的修饰符，可以修饰成员方法，成员
 - 默认先访问父类的无参构造方法,在执行自己.
 - 如果想要方法父类有参构造,必须手动写.
 
+
+
+
+
 ### 多态
+
+
 
 #### 调用成员的特点
 
 - `变量调用`：编译看左边，运行也看左边。
 - `方法调用`：编译看左边，运行看右边。
+
+
 
 #### 优势
 
@@ -416,6 +454,8 @@ p.work();	//业务逻辑发生改变时，后续代码无需修改。
 ```
 
 - 定义方法的时候，使用父类型作为参数，可以接受所有子类对象，体现多态的扩展性与便利。
+
+
 
 #### 弊端
 
@@ -1039,3 +1079,403 @@ public class Demo07 {
 }
 ```
 
+
+
+## 常见的API
+
+### Math
+
+- `Math.ceil()`：向上取整
+
+- `Math.floor()`：向下取整
+
+- `Math.abs()`：取绝对值
+
+- `Math.round()`：四舍五入
+
+- `Math.max()`：最大值
+
+- `Math.min()`：最小值
+
+- `Math.pow(2,3)`：获取a的n次幂，//8
+
+  
+
+
+
+### system
+
+- `public static native long currentTimeMillis();`  以毫秒为单位返回当前时间
+- `System.exit(0);` 关闭虚拟机 0:正常停止，非0 一场停止；
+- `System.arraycopy(Object src,  int  srcPos, Object dest, int destPos, int length);`：将一个数组复制到另一个数组
+  - src : 数组源 
+  - srcPos：数组源的起始位置
+  - dest：目标数组
+  - desPos：目标数组中起始位置
+  - length：要复制数组元素的数量
+
+
+
+
+
+### Runtime
+
+- `getRuntime`：获取当前系统运行环境的对象 `Runtime runtime = Runtime.getRuntime();`
+- `runtime .exit()`：停止虚拟机
+- `runtime.availableProcessors();`：获取CPU的线程数
+- `runtime.maxMemory()`：JVM能从系统中获取总内存大小
+- `runtime.totalMemory()`：JVM**已经**从系统中获取总内存大小
+- `runtime.freeMemory()`：JVM剩余内存大小
+- `runtime.exec()`：运行cmd 命令
+  - `shutdown`：关机
+    - `-s`：默认一分钟之后关机
+    - `-s  -t  ’指定时间‘` ：指定时间：指定关机时间
+    - `-a`： 取消关机
+    - `-r`：关机并重启
+
+
+
+
+
+### Object
+
+- `toString`：默认打印一个对象是地址值，重写之后就是属性值
+- `equals`：默认比较的是地址值，重写后比较属性值
+- `clone`：对象克隆
+  - 方法在底层会创建一个对象，并把原对象中的数据拷贝过去
+  - 细节：
+    - 重写Object中的Clone方法
+    - 让JavaBean 类实现Cloneable接口
+    - 创建原对象并调用Clone 方法即可
+  - 默认浅克隆：
+    - 如果需要深克隆，需重写方法或使用第三方工具类。
+
+
+
+
+
+### objects
+
+- equals()：先做非空判断，比较两个对象
+
+  1. 方法底层会判断 a 是否为 null，如果为 null，直接返回false。
+
+  2. 如果 a 不为 null ，那么就利用 a再次调用equals 方法。
+
+  3. 此时 a 是 javabean 类型 ，就会调用a 中的equals 方法。
+
+     > 如果没有重写，比较地址值，反正，则比较属性值
+
+- isNull：判断是否为null。
+
+- nonNull：判断是否不为 Null。
+
+
+
+
+
+### BigInteger (大整数)
+
+1. `BigInteger(int numBits, Random rnd)`：获取一个随机大整数
+
+2. `BigInteger(String val)`：获取一个指定的大整数
+   - 字符串中必须是一个整数
+
+3. `BigInteger(String val, int radix)`：获取指定进制的大整数
+   - 如果指定为二进制，那么字符串中只能写0和1，否则报错
+
+4. 常见的操作：
+   1. `add`：加		`subtract`：减
+   2. `multiply`：乘    	`divide、divideAndRemainder`：除
+   3. `equals、max、min`：比较
+   4. `pow`：次幂            `intValue、LongValue`：转成整数
+
+
+
+
+
+
+
+### BigDecimal
+
+1. 作用：
+
+   - 表示较大的小数和解决小数运算精度失真的问题
+
+2. 对象的创建：
+
+   - ```java
+     BigDecimal bd1 = new BigDecimal("较大的小数");
+     ```
+
+   - ```java
+     BigDecimal bd2 = BigDecimal.valueOf(0.1);
+     ```
+
+3. 常见的操作：
+
+   - 加：add
+   - 减：substract
+   - 乘：multiply
+   - 除：divide（四舍五入：RoundingMode.HALF_UP）
+
+
+
+
+
+
+
+### 正则表达式：`Regex`
+
+1. 获取正则表达式对象
+
+   - ```java
+      // 匹配 以Java开头，后面带0-2个数字的文本。例：Java、Java8、Java11
+     Pattern p = Pattern.compile("Java\\d{0,2}");   
+     ```
+
+2. 获取文本匹配器对象   `Matcher`：文本匹配器
+
+   > 文本匹配器按照正则表达式的规则去读取字符串，从头开始读取。
+
+     - ```java
+          Matcher m = p.matcher(str);
+          ```
+   
+     - `m.find()`：查找符合条件的序列
+   
+     - `m.group()`：返回查找到的内容
+   
+3. `replaceAll()`：替换正则表达式匹配的内容
+
+4. `split()`：以正则表达式匹配的内容切割
+
+   
+
+#### 分组
+
+##### 特点：
+
+- 从**1**开始，连续不间断
+- 以括号为基准，最左边的是第一组
+
+> 细节：如何识别组号？
+
+> 只看左括号，不看有括号，按照左括号的顺序，从左往右，依次为第一组，第二组，第三组等等
+
+
+
+
+
+##### 分类：
+
+1. 捕获分组（默认）：
+   - 可以获取每组中的内容反复使用
+2. 非捕获分组
+   - 分组之后不需要再用本组数据，仅仅把数据括起来，不占组号
+
+
+
+```java
+// 			\\组号：表示把第x组里的内容再拿出来用一次
+//			.   表示任意字符
+String regex1 = "(.+).+\\1";
+
+
+
+//需求2:判断一个字符串的开始部分和结束部分是否一致?可以有多个字符
+        //举例: abc123abc b456b 123789123 &!@abc&!@ abc123abd(false)
+        String regex1 = "(.+).+\\1";
+        System.out.println("abc123abc".matches(regex1));
+        System.out.println("b456b".matches(regex1));
+        System.out.println("123789123".matches(regex1));
+        System.out.println("&!@abc&!@".matches(regex1));
+        System.out.println("abc123abd(false)".matches(regex1));
+        System.out.println("===============================================");
+
+
+        //需求3:判断一个字符串的开始部分和结束部分是否一致?开始部分内部每个字符也需要一致
+        //举例: aaa123aaa bbb456bbb 111789111 &&abc&&
+        //(.):把首字母看做一组
+		//		(.)   			   组号2  	\\2
+		//		"((.)\\2*) 		组号1  	 \\1
+        String regex2 = "((.)\\2*).+\\1";
+
+        System.out.println("aaa123aaa".matches(regex2));
+        System.out.println("bbb456bbb".matches(regex2));
+        System.out.println("111789111".matches(regex2));
+        System.out.println("&&abc&&".matches(regex2));
+
+
+        String str = "我要学学编编编编程程程程程程";
+
+
+        //  (.) 把重复内容大的第一个字符看作一组
+        //  \\1 表示第一字符再次出现
+        //  +   至少一次
+        //  $1  把正则表达式第一组的内容，再拿出来使用
+        String result = str.replaceAll("(.)\\1+","$1");
+        System.out.println(result); 	//  "我要学编程
+		
+
+```
+
+
+
+### 时间（JDk7）
+
+#### Date
+
+##### 对象创建：
+
+```java
+Date date1 = new Date();
+Date date2 = new Date(指定毫秒值);
+```
+
+
+
+##### 修改对象中的毫秒值：
+
+- setTime(毫秒值);
+
+##### 获取对象中的毫秒值
+
+- getTime();
+
+
+
+
+
+#### SimpleDateFormat
+
+> 将时间格式化变成常见 的样式。
+
+```java
+//		年-月-日  时:分:秒  星期
+yyyy-MM-dd HH:mm:ss EE
+```
+
+```java
+//	1.创建simpleDateformat 对象进行格式化
+SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+//  通过创建\解析获得 date 对象
+Date date1 = new Date();     	//	创建
+Date date2 = sdf.parse(str);	//	解析
+
+//	使用 毫秒值 来表示当前时间（便于计算）
+long time = date1.getTime();
+
+//	格式化
+String str = sdf.format(date1);
+```
+
+
+
+
+
+#### Calendar
+
+> 日历抽象类
+
+```java
+Calendar c = Calendar.getInstance();
+```
+
+方法：
+
+```java
+public int get (int field )				// 获取日期中某个字段的信息
+public void  set (int field, int value)		//	修改某个字段的信息
+public  void add (int field , int amount)		// 为某个字段增加/减少指定值 
+```
+
+
+
+
+
+### 时间（JDK8）
+
+##### Date
+
+1. `ZoneID`：时区
+   - `getAvailableZoneIds()`：获取失去集合
+   - `systemDefault();`：获取系统默认的时区
+   - `of();`：获取指定的时区
+2. `Instant`：时间戳
+   - `static Instant now()`：获取当前时间的`Instant`对象
+   - `static Instant ofXXXX(long epochSecond)`：根据（秒/毫秒/纳秒）获取`Instant`对象
+   - `boolean isXXXX(Instant otherInstant)`：判断系列方法
+   - `Instant minusXXXX(long secondsToSubtract)`：减少时间系列方法
+   - `Instant plusXXXX(long secondsToAdd)`：增加时间系列方法
+3. `ZonedDateTime atZone(ZoneId zone)`：指定时区
+
+
+
+##### DateTimeFormat :用于时间的格式化和解析
+
+1. ` static DateTimeFormatter ofPattern(String pattern)`：格式化/解析器
+2. `format（）`：格式化
+
+
+
+##### 日历对象
+
+1. `localDate`：只包含（年，月，日）的日历对象
+
+2. `LocalTime`：只包含（时，分，秒）的日历对象
+
+3. `LocalDateTime`：包含（年，月，日，时，分，秒）的日历对象
+
+   - ```java
+     //		它们都有相对应的方法  例：
+     
+     //	获取当前时间的日历对象
+     LocalXXXX now1 = LocalXXXX.now();
+     //	获取指定时间的日历对象
+     LocalXXX lDate = LocalXXX.of();
+         
+     //	获取相应字段的值
+     int i = now1.getXXX();
+     
+     //	判断方法
+     boolean after = now1.isXXX(localDateTime);
+     
+     //	with 相应字段的值
+     now1.withXXX();
+     
+     //	minus  减去相应字段的值
+     now1.minusXXX()
+         
+     //	 plus  增加相应字段的值
+        now1.plusXXXX()
+     
+     ```
+
+     
+
+##### 工具类
+
+1. `Duration`：用于计算两个“时间“间隔（秒，纳秒）
+2. `Period`：用于计算两个“时间“间隔（年，月，日）
+3. `ChronoUnit`：用于计算两个“时间“间隔（所有单位）
+
+
+
+### 包装类
+
+> 基本数据类型对应的对象
+
+
+
+#### `Integer`：
+
+> 在进行 `==` 比较时，要注意的是，integer 在-128 ~127 之间，对每一个数都创建一个对象放在一个数组里。如果在这个范围里，直接反之数组里的对象，反之则会创建一个新的对象。
+
+成员方法：
+
+1. `static String toBinaryString(int i)`：返回二进制
+2. `static String toOctalString(int i) `：返回八进制
+3. `static String toHexString(int i)`：返回十六进制
+4. `static int parseInt(String s)`：将字符串类型的整数转成int 类型的整数
